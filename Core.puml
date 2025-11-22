@@ -1,0 +1,65 @@
+@startuml
+
+top to bottom direction
+
+
+class GameData 
+{
+    +Colony colony
+}
+
+class Colony {
+    +List<Citizen> citizens
+    +List<Building> buildings
+    +Queue<ColonyTask> tasks
+ }
+
+class ColonyTask {
+    +Building target
+}
+
+class Building {
+    +int uniqueID
+    +Vector2 position
+    +Queue<Citizen> citizen
+    +float interactionTime
+}
+
+class Warehouse {
+    +Dictionary<int, Resource> resources
+    +int capacity
+}
+
+class Shelter {
+    +List<int> citizenIDs
+    +int capacity
+}
+
+class Production {
+    +Resource resource
+    +int capacity
+    +float productionPerSecond
+}
+
+class Citizen {
+    +State state
+    +int uniqueID
+    +float satiety
+    +Resource resource
+}
+
+struct Resource
+{
+    +int typeID
+    +int amount
+}
+
+
+Building <|-. Shelter
+Building <|-. Warehouse
+Building <|-. Production
+Colony -> Citizen
+Building <- Colony
+Resource <- Citizen 
+Production --> Resource
+@enduml
