@@ -5,18 +5,25 @@ package "Core"
     class GameData
     {
         +Colony colony
-        +ResourceRepository resourceDatabase
-        +EntityFactory<Citizen> citizensFactory
-        +EntityFactory<Building> buildingsFactory
-        +EntityFactory<Task> buildingsFactory
+        +ResourceRepository ResourceRepository
+        +EntityFactory<Citizen> citizenFactory
+        +EntityFactory<Building> buildingFactory
+        +EntityFactory<Task> TaskFactory
     }
     
     class Colony 
     {
-        +List<int> buildingsId
-        +List<int> citizensId
+        +List<Building> buildings
+        +List<Citizen> citizens
         
         +TaskManager taskManager
+    }
+    
+    class TaskManager
+    {
+        +List<Task> availableTasks
+        +List<Task> claimedTasks
+        -TasksFactory tasksFactory
     }
 }
 
@@ -100,13 +107,6 @@ package "Resources"
     }
     
     ResourceRepository o-- ResourceType
-}
-
-class TaskManager
-{
-    +List<Task> availableTasks
-    +List<Task> claimedTasks
-    -TasksFactory tasksFactory
 }
 
 package "Tasks"
