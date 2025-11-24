@@ -58,40 +58,6 @@ package "Factories"
     EntityFactory <|-- TasksFactory
 }
 
-package "Buildings" 
-{
-    abstract class Building
-    {
-        +int id
-        +string name
-        +Vector2 position;
-        +int maxCapacity
-    }
-    
-    class ProductionBuilding 
-    {
-        +float productionTime
-        +int productionAmount
-        +int targetResourceID
-    }
-    
-    class ServiceBuilding
-    {
-        +float serviceTime
-        +List<int> beingServed
-        +int maxQueueSize
-        +Queue<int> waitingQueue
-    }
-    
-    class Storage
-    {
-        +Dictionary<int, int> resourceAmountByID
-    }
-    
-    Building <|-- ProductionBuilding
-    Building <|-- ServiceBuilding
-    Building <|-- Storage
-}
 
 package "Resources" 
 {

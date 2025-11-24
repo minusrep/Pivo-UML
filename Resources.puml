@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package "Resources" 
+{
+    class ColonyResources {
+        +List<Resource> resources
+    }
+
+    class ResourceConfigStorage {
+       +Dictionary<int, ResourceConfig> configs
+    }
+    
+    class ResourceConfig {
+        +string name
+        +string description
+    }
+
+    struct Resource {
+        +int typeId
+        +int amount
+    }
+    
+    ResourceConfigStorage ..> ResourceConfig
+    ColonyResources ..> Resource
+}
+
+
+@enduml
