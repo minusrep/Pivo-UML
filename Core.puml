@@ -1,65 +1,193 @@
 @startuml
 
-top to bottom direction
-
-
-class GameData 
+package "Core"
 {
-    +Colony colony
+    class GameData
+    {
+        +Colony colony
+        +ResourceRepository resourceDatabase
+        +EntityFactory<Citizen> citizensFactory
+        +EntityFactory<Building> buildingsFactory
+        +EntityFactory<Task> buildingsFactory
+    }
+    
+    class Colony 
+    {
+        +List<int> buildingsId
+        +List<int> citizensId
+        
+        +TaskManager taskManager
+    }
 }
 
-class Colony {
-    +List<Citizen> citizens
-    +List<Building> buildings
-    +Queue<ColonyTask> tasks
- }
-
-class ColonyTask {
-    +Building target
-}
-
-class Building {
-    +int uniqueID
-    +Vector2 position
-    +Queue<Citizen> citizen
-    +float interactionTime
-}
-
-class Warehouse {
-    +Dictionary<int, Resource> resources
-    +int capacity
-}
-
-class Shelter {
-    +List<int> citizenIDs
-    +int capacity
-}
-
-class Production {
-    +Resource resource
-    +int capacity
-    +float productionPerSecond
-}
-
-class Citizen {
-    +State state
-    +int uniqueID
-    +float satiety
-    +Resource resource
-}
-
-struct Resource
+package "Factories"
 {
-    +int typeID
-    +int amount
+    class EntityFactory<T>
+    {
+        #Dictionary<int, T> entitiesById
+        #int nextId
+    } 
+    
+    class TasksFactory
+    {
+        -Dictionary<int, Task> tasksById
+        -int nextTaskId
+    }
+    
+    class BuildingsFactory
+    {
+        -Dictionary<int, Building> buildingsById
+        -int nextBuildingId
+    }
+
+    class CitizensFactory
+    {
+        -Dictionary<int, Citizen> citizensById
+        -int nextCitizenId
+    }
+    
+    EntityFactory <|-- CitizensFactory
+    EntityFactory <|-- BuildingsFactory
+    EntityFactory <|-- TasksFactory
 }
 
+package "Buildings" 
+{
+    abstract class Building
+    {
+        +int id
+        +string name
+        +Vector2 position;
+        +int maxCapacity
+    }
+    
+    class ProductionBuilding 
+    {
+        +float productionTime
+        +int productionAmount
+        +int targetResourceID
+    }
+    
+    class ServiceBuilding
+    {
+        +float serviceTime
+        +List<int> beingServed
+        +int maxQueueSize
+        +Queue<int> waitingQueue
+    }
+    
+    class Storage
+    {
+        +Dictionary<int, int> resourceAmountByID
+    }
+    
+    Building <|-- ProductionBuilding
+    Building <|-- ServiceBuilding
+    Building <|-- Storage
+}
 
-Building <|-. Shelter
-Building <|-. Warehouse
-Building <|-. Production
-Colony -> Citizen
-Building <- Colony
-Resource <- Citizen 
-Production --> Resource
+package "Resources" 
+{
+    class ResourceType
+    {
+        +int id
+        +string name
+    }
+    
+    class ResourceRepository
+    {
+        +Dictionary<int, ResourceType> resourceTypeByID;
+    }
+    
+    ResourceRepository o-- ResourceType
+}
+
+class TaskManager
+{
+    +List<Task> availableTasks
+    +List<Task> claimedTasks
+    -TasksFactory tasksFactory
+}
+
+package "Tasks"
+{
+    abstract class Task
+    {
+        +int id
+        +int priority
+        +TaskType type
+        +TaskStatus status
+        +int targetId
+        +int providerId
+        +int? assignedId
+        +DateTime createdTime
+    }
+    
+    enum TaskStatus
+    {
+        Available,
+        Queued,
+        Blocked,
+        Reserved,
+        Assigned,
+        InProgress,
+        Paused,
+        Completed,
+        Cancelled,
+        Failed
+    }
+    
+    enum TaskType
+    {
+        Delivery,
+        Rest,
+        Eat
+    }
+    
+    class DeliveryTask
+    {
+        +int resourceId
+        +int amount
+    }
+    
+    Task --> TaskStatus
+    Task --> TaskType
+    
+    Task <|-- DeliveryTask
+}
+
+package "Citizens" 
+{
+    class Citizen
+    {
+        +int id
+        +string name
+        +int shelterId
+        +Vector2 position
+        +CitizenNeeds needs
+        +float health
+        +float moveSpeed
+    }
+    
+    class CitizenNeeds
+    {
+        +float hunger
+        +float energy
+    }
+    
+    Citizen --> CitizenNeeds
+}
+
+GameData --> Colony
+GameData --> ResourceRepository
+TaskManager ..> TasksFactory
+
+CitizensFactory o-- Citizen
+BuildingsFactory o-- Building
+TasksFactory o-- Task
+
+Colony --> TaskManager
+
+GameData --> EntityFactory
+
 @enduml
