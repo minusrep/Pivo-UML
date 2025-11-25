@@ -2,44 +2,49 @@
 
 package "Colony" 
 {
-    
-    package "Configs" {
-        class ColonyConfig {
+    package "Configs" 
+    {
+        class ColonyConfig 
+        {
         }
     }
-
-    package "Models" {
-     class Colony 
-        {
-            +ColonyConfig config
-            +ColonyPopulation population
-            +ColonyBuildings buildings
-        }
-        
-        class ColonyPopulation 
-        {
-            +List<Citizen> citizens
-        }
-        
-        class ColonyBuildings 
-        {
-            +List<ProductionBuilding> productionBuildings
-            +List<ServiceBuilding> serviceBuildings
-            +List<StorageBuilding> storageBuildings
-            +List<DecorBuilding> decorBuildings
-        }
-        
-        class TaskManager
-        {
-            +Queue<ColonyTask> tasks
-        }
-        
-        Colony *-- ColonyPopulation
-        Colony *-- ColonyBuildings
-        Colony *-- TaskManager
-    }
-
 }
-
+    package "Models" {
+    class Colony 
+    {
+        +ColonyConfig config
+        +ColonyDirector director
+    }
+    
+    class ColonyDirector
+    {
+        +ColonyPopulation population
+        +ColonyBuildings buildings
+        +ColonyOrdersPool pool
+    }
+    
+    class ColonyPopulation 
+    {
+        +List<Citizen> citizens
+    }
+    
+    class ColonyBuildings 
+    {
+        +List<ProductionBuilding> productionBuildings
+        +List<ServiceBuilding> serviceBuildings
+        +List<StorageBuilding> storageBuildings
+        +List<DecorBuilding> decorBuildings
+    }
+    
+    class TaskManager
+    {
+        +Queue<ColonyTask> tasks
+    }
+    
+    Colony *-- ColonyPopulation
+    Colony *-- ColonyBuildings
+    Colony *-- TaskManager
+    }
+}
 
 @enduml

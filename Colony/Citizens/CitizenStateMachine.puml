@@ -1,11 +1,12 @@
 @startuml
 
+state Any
 state IdleState
-state MoveState
-state WaitState
+state EatState
+state WorkState
 
-MoveState -> WaitState
-WaitState -> IdleState
-
+Any --> EatState : hunger < n
+Any --> IdleState : hunger > n
+IdleState --> WorkState: hasWork
 
 @enduml

@@ -8,6 +8,7 @@ package "Citizens"
         {
             +string[] names
             +float startMoveSpeed
+            +Dictionary<string, int> minimumNeedThresholds
         }
     }
 
@@ -18,43 +19,18 @@ package "Citizens"
             +int id
             +string name
             +Dictionary<string, Resource> needs
+            +Dictionary<string, int> minimumNeedThresholds
             +CitizenStateMachine stateMachine
-            +float moveSpeed
             +Vector2 position
+            +float moveSpeed
         }
     
-     package "StateMachine" {
-        class CitizenStateMachine {
-            +Dictionary<Type, CitizenState> states
-            +CitizenState currentState
-        }   
-        
-        abstract class CitizenState 
-        {
-            
-        }
-        
-        class IdleState 
-        {        
-            
-        }
-        
-        class MoveState 
-        {
-            +Vector2 position
-        }
-        
-        class WaitState 
-        {
-            +Vector2 position
-        }
-        
-        CitizenState <|.. WaitState  
-        CitizenState <|.. MoveState  
-        CitizenState <|.. IdleState  
-        CitizenStateMachine --> CitizenState
-        }
-    }
+    'TODO: Подумать над управлением состояний'
+    package "StateMachine" {
+    class CitizenStateMachine 
+    {
+        +CitizenState currentState
+    }   
 }
 
 @enduml

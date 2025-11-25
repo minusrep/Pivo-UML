@@ -4,14 +4,8 @@ package "ColonyOrders"
 {
     package "Models"
     {
-        class ColonyDirector
+        class ColonyOrdersPool 
         {
-            +ColonyPopulation population
-            +ColonyBuildings buildings
-            +ColonyOrdersPool pool
-        }
-        
-        class ColonyOrdersPool {
             +Queue<ColonyOrder> claimedOrders    
             +Queue<ColonyOrder> availableOrders    
         }
@@ -23,6 +17,14 @@ package "ColonyOrders"
             +int fromBuildingId
             +List<int> citizensId
         }
+        
+        class DeliveryOrder
+        {
+            +Resource resource
+        }
+        
+        ColonyOrdersPool --> ColonyOrder
+        ColonyOrder <|-- DeliveryOrder
     }
 }
 

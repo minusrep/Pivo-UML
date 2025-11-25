@@ -19,6 +19,13 @@ package "Core"
         +TaskManager taskManager
     }
     
+    class ColonyDirector
+    {
+        +ColonyPopulation population
+        +ColonyBuildings buildings
+        +ColonyOrdersPool pool
+    }
+    
     class TaskManager
     {
         +List<Task> availableTasks
