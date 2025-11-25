@@ -1,0 +1,29 @@
+@startuml
+
+package "ColonyOrders"
+{
+    package "Models"
+    {
+        class ColonyDirector
+        {
+            +ColonyPopulation population
+            +ColonyBuildings buildings
+            +ColonyOrdersPool pool
+        }
+        
+        class ColonyOrdersPool {
+            +Queue<ColonyOrder> claimedOrders    
+            +Queue<ColonyOrder> availableOrders    
+        }
+        
+        class ColonyOrder
+        {
+            +int id
+            +int toBuildingId
+            +int fromBuildingId
+            +List<int> citizensId
+        }
+    }
+}
+
+@enduml

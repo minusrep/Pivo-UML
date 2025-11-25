@@ -1,12 +1,11 @@
 @startuml
-state Any
 
-state SelfCare
+state IdleState
+state MoveState
+state WaitState
 
-state Idle
+MoveState -> WaitState
+WaitState -> IdleState
 
-Any --> Idle
-Any --> Work : not hasNeeds and hasTask
-Any --> SelfCare : hasNeeds
 
 @enduml

@@ -17,7 +17,6 @@ package "Citizens"
         {
             +int id
             +string name
-            +Resource resource
             +Dictionary<string, Resource> needs
             +CitizenStateMachine stateMachine
             +float moveSpeed
@@ -27,7 +26,6 @@ package "Citizens"
      package "StateMachine" {
         class CitizenStateMachine {
             +Dictionary<Type, CitizenState> states
-            +ColonyBuildings buildings
             +CitizenState currentState
         }   
         
@@ -36,24 +34,24 @@ package "Citizens"
             
         }
         
-        class CitizenIdleState 
+        class IdleState 
         {        
             
         }
         
-        class CitizenWorkState 
+        class MoveState 
         {
-            +ColonyTask task
+            +Vector2 position
         }
         
-        class CitizenSelfCareState 
+        class WaitState 
         {
-            +ServiceBuilding serviceBuilding
+            +Vector2 position
         }
         
-        CitizenState <|.. CitizenIdleState  
-        CitizenState <|.. CitizenWorkState  
-        CitizenState <|.. CitizenSelfCareState  
+        CitizenState <|.. WaitState  
+        CitizenState <|.. MoveState  
+        CitizenState <|.. IdleState  
         CitizenStateMachine --> CitizenState
         }
     }
