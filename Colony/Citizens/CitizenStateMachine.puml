@@ -1,5 +1,5 @@
 @startuml
-state Any <<Color #A3BE8C>>
+state Any
 
 state Eat
 
