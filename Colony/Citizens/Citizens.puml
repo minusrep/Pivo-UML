@@ -25,32 +25,35 @@ package "Citizens"
     
      package "StateMachine" {
         class CitizenStateMachine {
-            +Dictionary<Type, State> states
+            +Dictionary<Type, CitizenState> states
             +ColonyBuildings buildings
             +CitizenState currentState
         }   
         
-        class CitizenState {
+        abstract class CitizenState 
+        {
             
         }
         
-        class CitizenIdleState {
+        class CitizenIdleState 
+        {        
+            
         }
         
-        class CitizenWorkState {
+        class CitizenWorkState 
+        {
             +ColonyTask task
-            +ProductionBuilding productionBuilding
         }
         
-        class CitizenSelfCareState {
+        class CitizenSelfCareState 
+        {
             +ServiceBuilding serviceBuilding
         }
-
+        
         CitizenState <|.. CitizenIdleState  
         CitizenState <|.. CitizenWorkState  
         CitizenState <|.. CitizenSelfCareState  
         CitizenStateMachine --> CitizenState
-        
         }
     }
 }

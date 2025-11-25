@@ -12,7 +12,6 @@ package "Colony"
      class Colony 
         {
             +ColonyConfig config
-            +ColonyResources resources
             +ColonyPopulation population
             +ColonyBuildings buildings
         }
@@ -24,7 +23,10 @@ package "Colony"
         
         class ColonyBuildings 
         {
-            +List<Building> buildings
+            +List<ProductionBuilding> productionBuildings
+            +List<ServiceBuilding> serviceBuildings
+            +List<StorageBuilding> storageBuildings
+            +List<DecorBuilding> decorBuildings
         }
         
         class TaskManager

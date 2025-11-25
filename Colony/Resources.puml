@@ -27,13 +27,6 @@ package "Resources"
             +ResourceConfig config
             +int amount
         }
-        
-        class CitizenResource {
-        
-        }
-        
-        class ItemResource {
-        }
     }
 }
 

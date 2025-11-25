@@ -1,0 +1,40 @@
+@startuml
+
+package "ColonyOrders"
+{
+    package "Models"
+    {
+        class ColonyOrderManager
+        {
+            +List<ColonyOrder> availableColonyTasks
+            +List<ColonyOrder> claimedColonyTasks
+        }
+        
+        class ColonyOrder
+        {
+            +int id
+            +int targetId
+            +List<int> assignedId
+            +int providerId
+            +ColonyOrderStatus status
+            +DateTime createdTime
+        }
+        
+        class DeliveryOrder
+        {
+            
+        }
+        
+        enum ColonyOrderStatus
+        {
+            Available,
+            Reserved,
+            InProgress
+        }
+        
+        ColonyOrderManager --> ColonyOrder
+        ColonyOrder <|-- DeliveryOrder
+    }
+}
+
+@enduml
