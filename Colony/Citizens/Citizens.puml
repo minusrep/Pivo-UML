@@ -8,6 +8,7 @@ package "Citizens"
         {
             +string[] names
             +float startMoveSpeed
+            'TODO: Перенести в конфиг StateMachine, это просто условия перехода состояния'
             +Dictionary<string, int> minimumNeedThresholds
         }
     }
@@ -19,13 +20,13 @@ package "Citizens"
             +int id
             +string name
             +Dictionary<string, Resource> needs
+            'TODO: Перенести в конфиг StateMachine, это просто условия перехода состояния'
             +Dictionary<string, int> minimumNeedThresholds
             +CitizenStateMachine stateMachine
             +Vector2 position
             +float moveSpeed
         }
     
-    'TODO: Подумать над управлением состояний'
     package "StateMachine" {
     class CitizenStateMachine 
     {

@@ -35,15 +35,10 @@ package "Colony"
         +List<StorageBuilding> storageBuildings
         +List<DecorBuilding> decorBuildings
     }
-    
-    class TaskManager
-    {
-        +Queue<ColonyTask> tasks
-    }
-    
-    Colony *-- ColonyPopulation
-    Colony *-- ColonyBuildings
-    Colony *-- TaskManager
+
+    Colony *-- ColonyDirector
+    ColonyDirector *-- ColonyBuildings
+    ColonyDirector *-- ColonyPopulation
     }
 }
 
