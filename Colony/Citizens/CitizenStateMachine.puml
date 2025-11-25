@@ -1,16 +1,12 @@
 @startuml
+state Any <<Color #A3BE8C>>
 
-package "Citizens"
-{
-    package "Configs"
-    {
-        
-    }
+state Eat
 
-    package "Models"
-    {
-        
-    }
-}
+state Idle
+
+Any --> Idle
+Any --> Work : not hungry and hasTask
+Any --> Eat : hungry
 
 @enduml
