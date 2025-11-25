@@ -30,6 +30,7 @@ package "Buildings"
             +int serviceTime
             +int maxQueue
             +int maxCitizenAmount
+            +string serviceResource
         }
         
         class StorageBuildingConfig 

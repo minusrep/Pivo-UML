@@ -13,8 +13,10 @@ package "Resources"
         {
             +string type
             +string name
+            +float reductionTime
+            +int reductionAmount
         }
-        
+
         ResourceConfigCollection o--> ResourceConfig 
     }
 
@@ -25,8 +27,14 @@ package "Resources"
             +ResourceConfig config
             +int amount
         }
+        
+        class CitizenResource {
+        
+        }
+        
+        class ItemResource {
+        }
     }
-
 }
 
 @enduml

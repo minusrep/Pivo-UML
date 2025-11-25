@@ -1,25 +1,43 @@
 @startuml
 
-class Colony 
+package "Colony" 
 {
-    +ColonyResources resources
-    +ColonyPopulation population
-    +ColonyBuildings buildings
+    
+    package "Configs" {
+        class ColonyConfig {
+        }
+    }
+
+    package "Models" {
+     class Colony 
+        {
+            +ColonyConfig config
+            +ColonyResources resources
+            +ColonyPopulation population
+            +ColonyBuildings buildings
+        }
+        
+        class ColonyPopulation 
+        {
+            +List<Citizen> citizens
+        }
+        
+        class ColonyBuildings 
+        {
+            +List<Building> buildings
+        }
+        
+        class TaskManager
+        {
+            +Queue<ColonyTask> tasks
+        }
+        
+        Colony *-- ColonyPopulation
+        Colony *-- ColonyBuildings
+        Colony *-- TaskManager
+    }
+
 }
 
-class ColonyPopulation 
-{
-    +List<Citizen> citizens
-}
-
-class ColonyBuildings 
-{
-    +List<Building> buildings
-}
-
-class TaskManager
-{
-    +Queue<ColonyTask> tasks
-}
 
 @enduml

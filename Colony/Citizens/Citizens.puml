@@ -4,12 +4,54 @@ package "Citizens"
 {
     package "Configs"
     {
-
+        class CitizensConfig
+        {
+            +string[] names
+            +float startMoveSpeed
+        }
     }
 
     package "Models"
     {
+        class Citizen 
+        {
+            +string name
+            +Resource resource
+            +Dictionary<string, Resource> needs
+            +CitizenStateMachine stateMachine
+            +float moveSpeed
+            +Vector2 position
+        }
+    
+     package "StateMachine" {
+        class CitizenStateMachine {
+            +Dictionary<Type, State> states
+            +ColonyBuildings buildings
+            +CitizenState currentState
+        }   
         
+        class CitizenState {
+            
+        }
+        
+        class CitizenIdleState {
+        }
+        
+        class CitizenWorkState {
+            +ColonyTask task
+            +ProductionBuilding productionBuilding
+        }
+        
+        class CitizenSelfCareState {
+            +ServiceBuilding serviceBuilding
+        }
+
+        CitizenState <|.. CitizenIdleState  
+        CitizenState <|.. CitizenWorkState  
+        CitizenState <|.. CitizenSelfCareState  
+        CitizenStateMachine --> CitizenState
+        
+        }
     }
 }
 
