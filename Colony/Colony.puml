@@ -22,6 +22,4 @@ class TaskManager
     +Queue<ColonyTask> tasks
 }
 
-
-
 @enduml
