@@ -2,15 +2,6 @@
 
 package "Resources" 
 {
-    package "Models"
-    {
-        class Resource
-        {
-            +ResourceConfig config
-            +int amount
-        }
-    }
-
     package "Configs"
     {
         class ResourceConfigCollection
@@ -26,6 +17,16 @@ package "Resources"
         
         ResourceConfigCollection o--> ResourceConfig 
     }
+
+    package "Models"
+    {
+        class Resource
+        {
+            +ResourceConfig config
+            +int amount
+        }
+    }
+
 }
 
 @enduml
