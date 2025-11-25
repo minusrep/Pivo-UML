@@ -3,26 +3,18 @@
 
 package "Resources" 
 {
-    class ColonyResources {
-        +List<Resource> resources
-    }
 
-    class ResourceConfigStorage {
-       +Dictionary<int, ResourceConfig> configs
-    }
-    
-    class ResourceConfig {
-        +string name
-        +string description
-    }
-
-    struct Resource {
-        +int typeId
+    class Resource 
+    {
+        +ResourceConfig config
         +int amount
     }
-    
-    ResourceConfigStorage ..> ResourceConfig
-    ColonyResources ..> Resource
+        
+    class ResourceConfig 
+    {
+        +string type
+        +string name
+    }
 }
 
 
