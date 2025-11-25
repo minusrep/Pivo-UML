@@ -1,21 +1,31 @@
 @startuml
-'https://plantuml.com/class-diagram
 
 package "Resources" 
 {
-
-    class Resource 
+    package "Models"
     {
-        +ResourceConfig config
-        +int amount
+        class Resource
+        {
+            +ResourceConfig config
+            +int amount
+        }
     }
-        
-    class ResourceConfig 
+
+    package "Configs"
     {
-        +string type
-        +string name
+        class ResourceConfigCollection
+        {
+            +Dictionary<string, ResourceConfig> configs
+        }
+            
+        class ResourceConfig 
+        {
+            +string type
+            +string name
+        }
+        
+        ResourceConfigCollection o--> ResourceConfig 
     }
 }
-
 
 @enduml

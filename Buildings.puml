@@ -1,37 +1,89 @@
 @startuml
-package "Buildings" 
+
+package "Buildings"
 {
-    abstract class Building
-    {
-        +int id
-        +string name
-        +Vector2 position;
-        +int maxCapacity
+    package "Configs"{
+        
+        class BuildingConfigCollection 
+        {
+            +Dictionary<string, BuildingConfig> configs
+        }
+        
+        class BuildingConfig
+        {
+            +string type
+        }
+        
+        class DecorationBuildingConfig
+        {
+        }
+        
+        class ProductionBuildingConfig
+        {
+            +int productionTime        
+            +string productionResource
+            +int maxResourceAmount
+        }
+        
+        class ServiceBuildingConfig 
+        {
+            +int serviceTime
+            +int maxQueue
+            +int maxCitizenAmount
+        }
+        
+        class StorageBuildingConfig 
+        {
+            +int maxResourceAmount
+        }
+        
+        BuildingConfig <|.. DecorationBuildingConfig  
+        BuildingConfig <|.. ProductionBuildingConfig  
+        BuildingConfig <|.. ServiceBuildingConfig  
+        BuildingConfig <|.. StorageBuildingConfig  
+        BuildingConfigCollection o--> BuildingConfig 
     }
-    
-    class ProductionBuilding 
+
+    package "Models"
     {
-        +float productionTime
-        +int productionAmount
-        +int targetResourceID
+        class Building
+        {
+            +int id
+            +Vector2 position
+        }
+        
+        class ProductionBuilding
+        {
+            +ProductionBuildingConfig config
+            +long completeProductionTime
+            +bool isActive
+            +Resource resource
+        }
+        
+        class ServiceBuilding
+        {
+            +ServiceBuildingConfig config
+            +bool isActive
+            +Dictionary<int, long> inService
+            +Queue<int> waitingQueue
+        }
+        
+        class DecorBuilding
+        {
+            +DecorBuildingConfig config
+        }
+        
+        class StorageBuilding
+        {
+            +StorageBuildingConfig config
+            +Dictionary<string, Resource> resources
+        }
+        
+        Building <|.. ProductionBuilding
+        Building <|.. ServiceBuilding
+        Building <|.. DecorBuilding
+        Building <|.. StorageBuilding
     }
-    
-    class ServiceBuilding
-    {
-        +float serviceTime
-        +List<int> beingServed
-        +int maxQueueSize
-        +Queue<int> waitingQueue
-    }
-    
-    class Storage
-    {
-        +Dictionary<int, int> resourceAmountByID
-    }
-    
-    Building <|-- ProductionBuilding
-    Building <|-- ServiceBuilding
-    Building <|-- Storage
 }
 
 @enduml
