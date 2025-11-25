@@ -15,6 +15,7 @@ package "Citizens"
     {
         class Citizen 
         {
+            +int id
             +string name
             +Resource resource
             +Dictionary<string, Resource> needs
