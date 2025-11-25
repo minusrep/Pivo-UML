@@ -1,0 +1,43 @@
+@startuml
+
+package "Building"
+{
+    class Building
+    {
+        +int id
+        +int capacity
+        +Vector2 position
+    }
+    
+    class ProductionBuilding
+    {
+        +long completeTime
+        +bool isActive
+        +ProductionBuildingConfig config
+    }
+    
+    class ServiceBuilding
+    {
+        +List<int> beingServed
+        +Queue<int> waitingQueue
+        +ServiceBuildingConfig config
+    }
+    
+    class DecorBuilding
+    {
+        +DecorBuildingConfig config
+    }
+    
+    class Storage
+    {
+        +List<Resource> resources
+        +StorageBuildingConfig config
+    }
+    
+    Building <|-- ProductionBuilding
+    Building <|-- ServiceBuilding
+    Building <|-- DecorBuilding
+    Building <|-- Storage
+}
+
+@enduml

@@ -1,16 +1,19 @@
 @startuml
 
-class Colony {
+class Colony 
+{
     +ColonyResources resources
     +ColonyPopulation population
     +ColonyBuildings buildings
 }
 
-class ColonyPopulation {
+class ColonyPopulation 
+{
     +List<Citizen> citizens
 }
 
-class ColonyBuildings {
+class ColonyBuildings 
+{
     +List<Building> buildings
 }
 
@@ -19,15 +22,6 @@ class TaskManager
     +Queue<ColonyTask> tasks
 }
 
-class Entity
-{
-    +int instanceId 
-    +int typeId
-}
 
-class ColonyFactory
-{
-
-}
 
 @enduml
