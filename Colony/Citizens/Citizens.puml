@@ -8,6 +8,7 @@ package "Citizens"
         {
             +string[] names
             +float startMoveSpeed
+            +Dictionary<string, (int, int))> thresholdNeeds
         }
     }
 

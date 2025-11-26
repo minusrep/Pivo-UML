@@ -8,7 +8,6 @@ package "ColonyOrders"
         {
             +Dictionary<string, ColonyOrder> claimedOrders    
             +Dictionary<string, ColonyOrder> availableOrders
-            +ColonyOrderDescriptionCollection colonyOrderDescriptionCollection
         }
         
         class ColonyOrder
@@ -19,21 +18,13 @@ package "ColonyOrders"
             +List<int> citizensId
         }
         
-        ColonyOrdersPool --> ColonyOrder
-    }
-    
-    package "Descriptions"
-    {        
-        class ColonyOrderDescriptionCollection
+        class DeliveryOrder
         {
-            +Dictionary<string, ColonyOrderDescription> descriptions
+            Resource resource
         }
         
-        class ColonyOrderDescription
-        {
-            +string name
-            +string description
-        }
+        ColonyOrdersPool --> ColonyOrder
+        DeliveryOrder <|.. ColonyOrder
     }
 }
 

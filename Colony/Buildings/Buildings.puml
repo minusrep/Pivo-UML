@@ -21,14 +21,14 @@ package "Buildings"
         
         class ProductionBuildingDescription
         {
-            +int productionTime        
+            +long productionTime        
             +string productionResource
             +int maxResourceAmount
         }
         
         class ServiceBuildingDescription 
         {
-            +int serviceTime
+            +long serviceTime
             +int maxQueue
             +int maxCitizenAmount
             +string serviceResource

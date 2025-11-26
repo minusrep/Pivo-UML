@@ -1,4 +1,4 @@
-{
+﻿{
   "citizen_state_machine": {
     "initial_state": "idle",
     "global_transitions": [
@@ -80,26 +80,6 @@
           }
         ]
       }
-    }
-  },
-  "resources": {
-    "wood": {
-      "type": "resource",
-      "name": "дерево",
-      "reduction_time": 0,
-      "reduction_amount": 0
-    },
-    "hunger": {
-      "type": "need",
-      "name": "голод",
-      "reduction_time": 60,
-      "reduction_amount": 1
-    },
-    "energy": {
-      "type": "need",
-      "name": "энергия",
-      "reduction_time": 30,
-      "reduction_amount": 1
     }
   }
 }
