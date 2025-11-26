@@ -2,14 +2,14 @@
 
 package "Resources" 
 {
-    package "Configs"
+    package "Descriptions"
     {
-        class ResourceConfigCollection
+        class ResourceDescriptionsCollection
         {
-            +Dictionary<string, ResourceConfig> configs
+            +Dictionary<string, ResourceDescription> descriptions
         }
             
-        class ResourceConfig 
+        class ResourceDescription 
         {
             +string type
             +string name
@@ -17,14 +17,14 @@ package "Resources"
             +int reductionAmount
         }
 
-        ResourceConfigCollection o--> ResourceConfig 
+        ResourceDescriptionsCollection o--> ResourceDescription 
     }
 
     package "Models"
     {
         class Resource
         {
-            +ResourceConfig config
+            +ResourceDescription description
             +int amount
         }
     }

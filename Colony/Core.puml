@@ -2,165 +2,20 @@
 
 package "Core"
 {
-    class GameData
-    {
-        +Colony colony
-        +ResourceRepository ResourceRepository
-        +EntityFactory<Citizen> citizenFactory
-        +EntityFactory<Building> buildingFactory
-        +EntityFactory<Task> TaskFactory
-    }
-    
-    class Colony 
-    {
-        +List<Building> buildings
-        +List<Citizen> citizens
-        
-        +TaskManager taskManager
-    }
-    
-    class ColonyDirector
-    {
-        +ColonyPopulation population
-        +ColonyBuildings buildings
-        +ColonyOrdersPool pool
-    }
-    
-    class TaskManager
-    {
-        +List<Task> availableTasks
-        +List<Task> claimedTasks
-        -TasksFactory tasksFactory
-    }
-}
-
-package "Factories"
-{
-    class EntityFactory<T>
-    {
-        #Dictionary<int, T> entitiesById
-        #int nextId
-    } 
-    
-    class TasksFactory
-    {
-        -Dictionary<int, Task> tasksById
-        -int nextTaskId
-    }
-    
-    class BuildingsFactory
-    {
-        -Dictionary<int, Building> buildingsById
-        -int nextBuildingId
-    }
-
-    class CitizensFactory
-    {
-        -Dictionary<int, Citizen> citizensById
-        -int nextCitizenId
-    }
-    
-    EntityFactory <|-- CitizensFactory
-    EntityFactory <|-- BuildingsFactory
-    EntityFactory <|-- TasksFactory
-}
-
-
-package "Resources" 
-{
-    class ResourceType
-    {
-        +int id
-        +string name
-    }
-    
-    class ResourceRepository
-    {
-        +Dictionary<int, ResourceType> resourceTypeByID;
-    }
-    
-    ResourceRepository o-- ResourceType
-}
-
-package "Tasks"
-{
-    abstract class Task
-    {
-        +int id
-        +int priority
-        +TaskType type
-        +TaskStatus status
-        +int targetId
-        +int providerId
-        +int? assignedId
-        +DateTime createdTime
-    }
-    
-    enum TaskStatus
-    {
-        Available,
-        Queued,
-        Blocked,
-        Reserved,
-        Assigned,
-        InProgress,
-        Paused,
-        Completed,
-        Cancelled,
-        Failed
-    }
-    
-    enum TaskType
-    {
-        Delivery,
-        Rest,
-        Eat
-    }
-    
-    class DeliveryTask
-    {
-        +int resourceId
-        +int amount
-    }
-    
-    Task --> TaskStatus
-    Task --> TaskType
-    
-    Task <|-- DeliveryTask
-}
-
-package "Citizens" 
-{
     class Citizen
-    {
-        +int id
-        +string name
-        +int shelterId
-        +Vector2 position
-        +CitizenNeeds needs
-        +float health
-        +float moveSpeed
-    }
+    class Colony
+    class ColonyOrder
+    class CitizenStateMachine
+    class Building
+    class Factory
+    class Resource
     
-    class CitizenNeeds
-    {
-        +float hunger
-        +float energy
-    }
-    
-    Citizen --> CitizenNeeds
+    Colony --> Factory
+    Colony --> ColonyOrder
+    Factory --> Building
+    Factory --> Resource
+    Factory --> Citizen
+    Citizen --> CitizenStateMachine
 }
-
-GameData --> Colony
-GameData --> ResourceRepository
-TaskManager ..> TasksFactory
-
-CitizensFactory o-- Citizen
-BuildingsFactory o-- Building
-TasksFactory o-- Task
-
-Colony --> TaskManager
-
-GameData --> EntityFactory
 
 @enduml

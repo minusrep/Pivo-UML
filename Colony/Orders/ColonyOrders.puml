@@ -1,0 +1,40 @@
+@startuml
+
+package "ColonyOrders"
+{
+    package "Models"
+    {
+        class ColonyOrdersPool 
+        {
+            +Dictionary<string, ColonyOrder> claimedOrders    
+            +Dictionary<string, ColonyOrder> availableOrders
+            +ColonyOrderDescriptionCollection colonyOrderDescriptionCollection
+        }
+        
+        class ColonyOrder
+        {
+            +int id
+            +int toBuildingId
+            +int fromBuildingId
+            +List<int> citizensId
+        }
+        
+        ColonyOrdersPool --> ColonyOrder
+    }
+    
+    package "Descriptions"
+    {        
+        class ColonyOrderDescriptionCollection
+        {
+            +Dictionary<string, ColonyOrderDescription> descriptions
+        }
+        
+        class ColonyOrderDescription
+        {
+            +string name
+            +string description
+        }
+    }
+}
+
+@enduml

@@ -13,16 +13,11 @@ package "Colony"
     class Colony 
     {
         +ColonyConfig config
-        +ColonyDirector director
-    }
-    
-    class ColonyDirector
-    {
         +ColonyPopulation population
         +ColonyBuildings buildings
         +ColonyOrdersPool pool
     }
-    
+
     class ColonyPopulation 
     {
         +List<Citizen> citizens
@@ -36,9 +31,8 @@ package "Colony"
         +List<DecorBuilding> decorBuildings
     }
 
-    Colony *-- ColonyDirector
-    ColonyDirector *-- ColonyBuildings
-    ColonyDirector *-- ColonyPopulation
+    Colony *-- ColonyBuildings
+    Colony *-- ColonyPopulation
     }
 }
 
