@@ -1,0 +1,56 @@
+@startuml
+
+package "StateMachine" 
+{
+    package "Models"
+    {
+        class CitizenStateMachine 
+        {
+            +CitizenState previousState
+            +CitizenState currentState
+            +CitizenStateMachineDescription citizenStateMachineDescription
+        }   
+        
+        class CitizenState
+        {
+            +CitizenStateDescription CitizenStateDescription
+            
+        }
+        
+        CitizenStateMachine ..> CitizenState
+    }
+
+    package "Descriptions"
+    {
+        class CitizenStateMachineDescription
+        {
+            +CitizenStateDescription initialState
+            +TransitionDescription[] globalTransitions
+            +Dictionary<string, CitizenStateDescription> stateDescriptions
+        }
+        
+        class CitizenStateDescription
+        {
+            +TransitionDescription[] transitionDescriptions
+        }
+        
+        class TransitionDescription
+        {
+            +string toState
+            +ConditionDescription[] conditionDescriptions
+        }
+        
+        class ConditionDescription
+        {
+            +string parameter
+            +string operator
+            +object value
+        }
+        
+        CitizenStateMachineDescription ..> CitizenStateDescription
+        CitizenStateDescription ..> TransitionDescription
+        TransitionDescription ..> ConditionDescription
+    }
+}
+
+@enduml

@@ -1,0 +1,105 @@
+{
+  "citizen_state_machine": {
+    "initial_state": "idle",
+    "global_transitions": [
+      {
+        "to": "eat",
+        "conditions": [
+          {
+            "parameter": "hunger",
+            "operation": "<",
+            "value": 30
+          }
+        ]
+      },
+      {
+        "to": "sleep",
+        "conditions": [
+          {
+            "parameter": "energy",
+            "operation": "<",
+            "value": 30
+          }
+        ]
+      }
+    ],
+    "states": {
+      "idle": {
+        "transitions": [
+          {
+            "to": "work",
+            "conditions": [
+              {
+                "parameter": "hasWork",
+                "operation": "==",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "eat": {
+        "transitions": [
+          {
+            "to": "idle",
+            "conditions": [
+              {
+                "parameter": "hunger",
+                "operation": "==",
+                "value": 100
+              }
+            ]
+          }
+        ]
+      },
+      "sleep": {
+        "transitions": [
+          {
+            "to": "idle",
+            "conditions": [
+              {
+                "parameter": "energy",
+                "operation": "==",
+                "value": 100
+              }
+            ]
+          }
+        ]
+      },
+      "work": {
+        "transitions": [
+          {
+            "to": "idle",
+            "conditions": [
+              {
+                "parameter": "hasWork",
+                "operation": "==",
+                "value": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "wood": {
+      "type": "resource",
+      "name": "дерево",
+      "reduction_time": 0,
+      "reduction_amount": 0
+    },
+    "hunger": {
+      "type": "need",
+      "name": "голод",
+      "reduction_time": 60,
+      "reduction_amount": 1
+    },
+    "energy": {
+      "type": "need",
+      "name": "энергия",
+      "reduction_time": 30,
+      "reduction_amount": 1
+    }
+  }
+}
