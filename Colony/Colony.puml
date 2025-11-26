@@ -2,9 +2,9 @@
 
 package "Colony" 
 {
-    package "Configs" 
+    package "Descriptions" 
     {
-        class ColonyConfig 
+        class ColonyDescription 
         {
         }
     }
@@ -12,7 +12,7 @@ package "Colony"
     package "Models" {
     class Colony 
     {
-        +ColonyConfig config
+        +ColonyDescription descriptions
         +ColonyPopulation population
         +ColonyBuildings buildings
         +ColonyOrdersPool pool
