@@ -2,30 +2,31 @@
 
 package "Buildings"
 {
-    package "Configs"{
+    package "Descriptions"{
         
-        class BuildingConfigCollection 
+        class BuildingDescriptionCollection 
         {
-            +Dictionary<string, BuildingConfig> configs
+            +Dictionary<string, BuildingDescription> Descriptions
         }
         
-        class BuildingConfig
+        class BuildingDescription
         {
             +string type
+            +string name
         }
         
-        class DecorationBuildingConfig
+        class DecorationBuildingDescription
         {
         }
         
-        class ProductionBuildingConfig
+        class ProductionBuildingDescription
         {
             +int productionTime        
             +string productionResource
             +int maxResourceAmount
         }
         
-        class ServiceBuildingConfig 
+        class ServiceBuildingDescription 
         {
             +int serviceTime
             +int maxQueue
@@ -33,16 +34,16 @@ package "Buildings"
             +string serviceResource
         }
         
-        class StorageBuildingConfig 
+        class StorageBuildingDescription 
         {
             +int maxResourceAmount
         }
         
-        BuildingConfig <|.. DecorationBuildingConfig  
-        BuildingConfig <|.. ProductionBuildingConfig  
-        BuildingConfig <|.. ServiceBuildingConfig  
-        BuildingConfig <|.. StorageBuildingConfig  
-        BuildingConfigCollection o--> BuildingConfig 
+        BuildingDescription <|.. DecorationBuildingDescription  
+        BuildingDescription <|.. ProductionBuildingDescription  
+        BuildingDescription <|.. ServiceBuildingDescription  
+        BuildingDescription <|.. StorageBuildingDescription  
+        BuildingDescriptionCollection o--> BuildingDescription 
     }
 
     package "Models"
@@ -55,7 +56,7 @@ package "Buildings"
         
         class ProductionBuilding
         {
-            +ProductionBuildingConfig config
+            +ProductionBuildingDescription Description
             +ColonyOrdersPool ordersPool
             +bool isActive
             +long completeProductionTime
@@ -64,7 +65,7 @@ package "Buildings"
         
         class ServiceBuilding
         {
-            +ServiceBuildingConfig config
+            +ServiceBuildingDescription Description
             +bool isActive
             +Dictionary<int, long> inService
             +Queue<int> waitingQueue
@@ -72,12 +73,12 @@ package "Buildings"
         
         class DecorBuilding
         {
-            +DecorBuildingConfig config
+            +DecorBuildingDescription Description
         }
         
         class StorageBuilding
         {
-            +StorageBuildingConfig config
+            +StorageBuildingDescription Description
             +Dictionary<string, Resource> resources
         }
         

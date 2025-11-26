@@ -1,12 +1,18 @@
 @startuml
 
 state Any
-state IdleState
-state EatState
-state WorkState
+state Idle
+state Eat
+state Work
+state Sleep
 
-Any --> EatState : hunger < n
-Any --> IdleState : hunger > n
-IdleState --> WorkState: hasWork
+Any --> Eat : hunger < n
+Any --> Sleep : energy < n
+
+Eat --> Idle : hunger = max
+Sleep --> Idle : energy = max
+
+Work --> Idle : !hasWork
+Idle --> Work : hasWork
 
 @enduml
